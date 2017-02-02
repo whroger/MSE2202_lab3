@@ -35,6 +35,10 @@ I2CEncoder encoder_LeftMotor;
 //#define DEBUG_LINE_TRACKER_CALIBRATION
 //#define DEBUG_MOTOR_CALIBRATION
 
+void MoveFoward();
+void MoveBackward();
+void Spin();
+
 boolean bt_Motors_Enabled = true;
 
 //port pin constants
@@ -304,24 +308,24 @@ void loop()
         ui_Right_Motor_Speed=1700;
         ui_Left_Motor_Speed=1700; 
        }
-       else if((!MiddleOnLine)&&(!LeftOnLine)&&(RightOnLine))
+       else if((!MiddleOnLine)&&(!LeftOnLine)&&(!RightOnLine))
        {
-        for(int TimeOut=millis();millis()-TimeOut<=80;){}
-        if((!MiddleOnLine)&&(!LeftOnLine)&&(RightOnLine))
-        {
+        //for(int TimeOut=millis();millis()-TimeOut<=80;){}
+        //if((!MiddleOnLine)&&(!LeftOnLine)&&(RightOnLine))
+        //{
          ui_Left_Motor_Speed=0;
          ui_Right_Motor_Speed=0;
-        }
+        //}
        }
        else if(LeftOnLine&&(!RightOnLine))       //Turn left
        {
         ui_Right_Motor_Speed=1700;
         ui_Left_Motor_Speed=0;        
        }
-       else if(RightOnLine&&(!LeftOnLine))
+       else if(RightOnLine&&(!LeftOnLine))      //Turn Right
        {
-        ui_Left_Motor_Speed=1700;
         ui_Right_Motor_Speed=0;
+        ui_Left_Motor_Speed=1700;                    //We can change this value
        }
        else if(MiddleOnLine&&LeftOnLine&&RightOnLine)
        {
